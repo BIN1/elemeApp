@@ -34,7 +34,6 @@ export default {
     created(){
         console.log('created：组件实例创建完成'+new Date().getTime());
         let vm=this;
-        console.log(vm.goods,vm.seller,vm.ratings);
     },
     beforeMount(){
         console.log('beforeMount:模板编译／挂载之前'+new Date().getTime());
