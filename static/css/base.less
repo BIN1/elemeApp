@@ -1,0 +1,20 @@
+body,html{
+    line-height: 1px;
+    font-weight: 200;
+    font-family: 'PingFang SC','STHeitiSC-Linght','Helvetica-Light',Arial, Helvetica, sans-serif
+}
+// 清除浮动
+.clearfix{
+    zoom: 1;
+}
+.clearfix1{
+    display: inline-block;
+}
+.clearfix1::after{
+    display: block;
+    content: ' ';
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+}
