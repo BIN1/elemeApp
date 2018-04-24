@@ -34,6 +34,7 @@
         </li>
       </ul>
     </div>
+    <shopcart :delivary-price='seller.deliveryPrice' :min-price='seller.minPrice'></shopcart>
   </div>
 </template>
 <style lang="less" scoped>
@@ -42,10 +43,15 @@
 <script>
 import Datas from "../../../static/data.json";
 import BScroll from 'better-scroll';
+import shopcart from '../shopcart/shopcart';
 export default {
+  components: {
+    shopcart
+  },
   data() {
     return {
       goods: Datas.goods,
+      seller:Datas.seller,
       listHeight:[],
       scrollY:0
     };
