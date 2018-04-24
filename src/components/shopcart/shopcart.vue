@@ -15,7 +15,7 @@
                 另需配送费¥{{delivaryPrice}}元
             </div>
         </div>
-        <div class="content-right">
+        <div class="content-right" @click="pay">
             <div class="pay" :class="payClass">
                 {{padDesc}}
             </div>
@@ -174,6 +174,11 @@ export default {
             this.selectFoods.forEach((food) => {
                 food.count=0;
             })
+        },
+        pay(){
+            if(this.totalPrice<this.minPrice){
+                return;
+            };
         }
     }
 }
