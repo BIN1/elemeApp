@@ -6,9 +6,9 @@
                   <div class="logo" :class="{'logo-active':totalCount}">
                       <i class="icon-cart iconfont"></i>
                   </div>
-                  <div class="num" v-show="totalCount">{{totalCount}}</div>
+                  <div class="num" v-show="totalCount>0">{{totalCount}}</div>
               </div>
-              <div class="price" :class="{'highlight-price':totalPrice}">
+              <div class="price" :class="{'highlight-price':totalPrice>0}">
                   ¥{{totalPrice}}
               </div>
               <div class="desc">

@@ -28,13 +28,16 @@
                   <span class="now">¥{{food.price}}</span>
                   <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food='food'></cartcontrol>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    <shopcart :delivary-price='seller.deliveryPrice' :min-price='seller.minPrice'></shopcart>
+    <shopcart :delivary-price='seller.deliveryPrice' :min-price='seller.minPrice' :select-foods='selectFoods'></shopcart>
   </div>
 </template>
 <style lang="less" scoped>
@@ -44,9 +47,10 @@
 import Datas from "../../../static/data.json";
 import BScroll from 'better-scroll';
 import shopcart from '../shopcart/shopcart';
+import cartcontrol from '../cartcontrol/cartcontrol';
 export default {
   components: {
-    shopcart
+    shopcart,cartcontrol
   },
   data() {
     return {
@@ -67,6 +71,18 @@ export default {
         }
       };
       return 0;
+    },
+    selectFoods(){
+      let vm=this;
+      let foods=[];
+      vm.goods.forEach((good) => {
+        good.foods.forEach((food) => {
+          if(food.count){
+            foods.push(food)
+          }
+        })
+      });
+      return foods;
     }
   },
   created(){
@@ -97,6 +113,7 @@ export default {
       });
       vm.footScroll=new BScroll(vm.$refs.footswrapper,{
         probeType:3,    //实时监听滚动位置
+        click:true
       });
       vm.footScroll.on('scroll',(pos) => {
         vm.scrollY=Math.abs(Math.round(pos.y));
