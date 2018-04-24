@@ -11,6 +11,13 @@
     <div class="cart-add" @click="addCart($event)">
         <i class="icon-add iconfont add"></i>
     </div>
+    <div class="ball-container">
+        <transition name="drop" v-for="(ball,index) in balls" :key="index" v-show="ball.show">
+            <div class="ball">
+                <div class="inner"></div>
+            </div>
+        </transition>
+    </div>
   </div>
 </template>
 <style lang="less" scoped>
@@ -26,6 +33,17 @@ export default {
           default:{}
       }
   },
+  data(){
+      return {
+          balls:[
+              {show:false},
+              {show:false},
+              {show:false},
+              {show:false},
+              {show:false}
+          ]
+      }
+  },
   methods: {
       addCart(event){
         let vm=this;
@@ -37,6 +55,7 @@ export default {
         }else{
             vm.food.count++;
         };
+        vm.$emit('cartAdd',event.target);
       },
       _decrease(event){
         let vm=this;

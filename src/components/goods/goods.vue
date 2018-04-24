@@ -29,7 +29,7 @@
                   <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food='food'></cartcontrol>
+                  <cartcontrol :food='food' @cartAdd='_drop($event)'></cartcontrol>
                 </div>
               </div>
             </li>
@@ -37,7 +37,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivary-price='seller.deliveryPrice' :min-price='seller.minPrice' :select-foods='selectFoods'></shopcart>
+    <shopcart ref="shopcart" :delivary-price='seller.deliveryPrice' :min-price='seller.minPrice' :select-foods='selectFoods'></shopcart>
   </div>
 </template>
 <style lang="less" scoped>
@@ -94,6 +94,9 @@ export default {
     vm.$nextTick(() => {
       vm._initScroll();
       vm._caculateHeight();
+    });
+    vm.$on('cartAdd',() => {
+      console.log('cartAdd');
     })
   },
   methods: {
@@ -129,7 +132,11 @@ export default {
         height+=item.clientHeight;
         vm.listHeight.push(height);
       };
-    }
+    },
+    _drop(target){
+      let vm=this;
+      vm.$refs.shopcart.drop(target);
+    },
   }
 };
 </script>
